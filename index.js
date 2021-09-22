@@ -51,31 +51,31 @@ const run = async() => {
   //   await db.query(sql)
   // }
 
-  const district = []
-  for (const l of locations) {
-    const p = l.province
-    const a = l.amphoe
-    const d = l.district
+  // const district = []
+  // for (const l of locations) {
+  //   const p = l.province
+  //   const a = l.amphoe
+  //   const d = l.district
 
-    const isExist = find(dd => {
-      return p === dd.p && a === dd.a && d === dd.d
-    })(district)
+  //   const isExist = find(dd => {
+  //     return p === dd.p && a === dd.a && d === dd.d
+  //   })(district)
 
-    if (isExist) continue
+  //   if (isExist) continue
 
-    district.push({
-      p: p,
-      a: a,
-      d: d
-    })
-  }
+  //   district.push({
+  //     p: p,
+  //     a: a,
+  //     d: d
+  //   })
+  // }
 
-  for (const ddi in district) {
-    const code = 10000 * (+ddi + 1)
-    const sql = `update m_location set district_code = ${code} where province = '${district[ddi].p}' and amphoe = '${district[ddi].a}' and district = '${district[ddi].d}'`
-    console.log(sql)
-    await db.query(sql)
-  }
+  // for (const ddi in district) {
+  //   const code = 10000 * (+ddi + 1)
+  //   const sql = `update m_location set district_code = ${code} where province = '${district[ddi].p}' and amphoe = '${district[ddi].a}' and district = '${district[ddi].d}'`
+  //   console.log(sql)
+  //   await db.query(sql)
+  // }
 
 }
 
