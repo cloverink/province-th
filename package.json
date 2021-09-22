@@ -4,7 +4,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "mocha \"./services/**/*.spec.js\" --timeout 10000 --slow 100"
+    "test": "mocha \"./services/**/*.spec.js\" --timeout 10000 --slow 100",
+    "lint": "eslint .",
+    "push": "git pull -r && yarn lint && yarn test && git push"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
