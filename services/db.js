@@ -9,7 +9,7 @@ const connect = async({
   pass,
   serviceName = 'INTAGE',
   max = 20,
-  idleTimeoutMillis = 10000,
+  idleTimeoutMillis = 1000,
   connectionTimeoutMillis = 5 * 60 * 1000
 }) => {
   try {
@@ -41,7 +41,7 @@ const connect = async({
       error(err)
     })
 
-    global.app.pool = pool
+    global.pool = pool
 
   } catch (e) {
     throw e
@@ -50,21 +50,21 @@ const connect = async({
 
 const begin = async(flag = false) => {
   if (flag)
-    await global.app.pool.query('BEGIN')
+    await global.pool.query('BEGIN')
 }
 const commit = async(flag = false) => {
   if (flag)
-    await global.app.pool.query('COMMIT')
+    await global.pool.query('COMMIT')
 }
 const rollback = async(flag = false) => {
   if (flag)
-    await global.app.pool.query('ROLLBACK')
+    await global.pool.query('ROLLBACK')
 }
 
 const query = async(query, props = [], transaction = false) => {
   try {
     await begin(transaction)
-    const result = await global.app.pool.query(query, props)
+    const result = await global.pool.query(query, props)
     await commit(transaction)
     return result.rows || []
   } catch (e) {
